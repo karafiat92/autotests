@@ -28,6 +28,27 @@ let tezroData;
             lastname: "sTudenT",
             message: ""
     }
+
+    // Данные для отправки транзакции с экрана Send
+    const sendCryptoData = [
+        {
+            address: "0xf13f5DA07820451A37716e16219884928004913A",
+            modalText: "Address you entered belongs to a user in Tezro, You can send internal transaction without commission.",
+            recipientName: "Fashio sTudenT",
+            externalMin: 0.01, 
+            currencyabbreviation: "ETH",
+            currencyName: "Ethereum"
+        },
+        {
+            address: "0xb6A6B94a87D05fe771912783a2BA65DB2dFa5Ea7",
+            recipientName: "External Transaction", 
+            modalText : "Address you entered belongs to external user. Transaction will be send with a small fee.",
+            externalMin: 0.01, 
+            currencyabbreviation: "ETH",
+            currencyName: "Ethereum",
+            commission: 0.01
+        }
+    ]
     // данные по кошелькам
     const cryptoData = [
         {
@@ -399,5 +420,6 @@ export default tezroData = {
     user,
     userLoginData, 
     userSignUpData,
-    userGlobalSearch
+    userGlobalSearch,
+    sendCryptoData
  }

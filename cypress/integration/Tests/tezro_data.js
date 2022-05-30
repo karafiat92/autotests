@@ -24,7 +24,7 @@ let tezroData;
     const cryptoData = [
         {
             amount: "0.000012",
-            address: "0x4F880463A5ead45A9E4402d2F0921E75aeade04D", // адрес eth получателя
+            address: "0xf13f5DA07820451A37716e16219884928004913A", // адрес eth получателя
             numberWallet: 1,
             decimal: 8,
             comment: "comment escrow1",

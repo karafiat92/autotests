@@ -93,19 +93,22 @@ describe("User's chat and message's context menu", () => {
       `p[class="messageTextItem MessageClassStyle_m2dsqsi StyleText_svkxk8i"]`,
       messageForTyping, "Reply"
     );
-    //typingAMessage();
+    typingAMessage();
     cy.get("#messageFieldValue")
       .wait(1000)
       .type(`sdfsdfsdf`)
       .should("contain.value", "sdfsdfsdf")
-      .type("{enter}");
+      // .type("{enter}");
+    // cy.get(".StyledChatSendMessageForm_s1u2lbry")
+    //   .submit()
+    
     //закрываем шапку реплая в поле текста
-    closeReplyHeader();
+    // closeReplyHeader();
     // проверка, что отправилось сообщение-ответ
     // cy.get('p[class="messageTextItem MessageClassStyle_m2dsqsi StyleText_svkxk8i"]')
     // .contains('sdfsdfsdf');
 
-    //FORWARD
+   /* //FORWARD
     openContextMenu(
       `p[class="messageTextItem MessageClassStyle_m2dsqsi StyleText_svkxk8i"]`,
       messageForTyping, "Forward"
@@ -150,7 +153,7 @@ describe("User's chat and message's context menu", () => {
     cy.get(`p[class="messageTextItem MessageClassStyle_m2dsqsi StyleText_svkxk8i"]`)
       //допущение для прохождения теста, однако, редактирование текста не работает
       .contains(messageForTyping).should('not.exist')
-
+*/
 
   }); //it2
 });//describe
