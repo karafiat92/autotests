@@ -1,0 +1,9 @@
+{
+    "externals": {
+        "react": "React"
+    },
+    
+        "viewportWidth": 1000,
+        "viewportHeight": 660 
+
+}
