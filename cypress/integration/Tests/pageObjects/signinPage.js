@@ -18,25 +18,25 @@ const signIn = {
     // операции 
     openSigninPage() {
         cy.viewport(1800, 950)
-        .visit(testData.urls.startUrl);
+            .visit(testData.urls.startUrl);
         cy.url()
-        .should("eq", testData.urls.startUrl);
+            .should("eq", testData.urls.startUrl);
         cy.get(this.signInButton)
-        .click();
+            .click();
         cy.url()
-        .should("eq", testData.urls.signInUrl);
+            .should("eq", testData.urls.signInUrl);
     },
     typeSeedPhrase(userLoginDataNumber) {
         cy.get(this.seedPhraseInput)
-        .should("contain.value", "")
-        .type(testData.userLoginData[userLoginDataNumber].seedPhrase)
-        .should('contain.value', testData.userLoginData[userLoginDataNumber].seedPhrase)
+            .should("contain.value", "")
+            .type(testData.userLoginData[userLoginDataNumber].seedPhrase)
+            .should('contain.value', testData.userLoginData[userLoginDataNumber].seedPhrase)
         cy.get(this.loginButton).click().wait(2000)
     },
     enterPincode(userLoginDataNumber) {
         this.pinInput.forEach(pin => {
             cy.get(pin).type(testData.userLoginData[userLoginDataNumber].pin)
-          })
+        })
     }
 }
 export default signIn
