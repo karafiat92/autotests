@@ -1,79 +1,32 @@
 
 ///<reference types="cypress"/>
 
-import tezroData from '../../support/tezro_data';
-import tezroFunctions from "./page_model/signUpSignInLogOut.spec";
-import checkUserData from './page_model/checkUserData.spec'
-import signUp2Step from './page_model/signup2step.spec'
-import mainPageUser from './page_model/main_settings.spec'
-import locators from '../../support/elementsLocators'
+// import tezroData from '../../support/tezro_data';
+// import tezroFunctions from "./page_model/signUpSignInLogOut.spec";
+// import checkUserData from './page_model/checkUserData.spec'
+// import signUp2Step from './page_model/signup2step.spec'
+// import mainPageUser from './page_model/main_settings.spec'
+// import locators from '../../support/elementsLocators'
 
-let signinLoc = locators?.signInLocators.signIn
+// let signinLoc = locators?.signInLocators.signIn
+import signIn from './pageObjects/signinPage';
+
 
 describe("Authorisation in Web Tezro", () => {
 
   it("1. tezro sign in: success", () => {
-    /* на будущее для переписывания в тесты вида Лены
-    cy.visit(tezroData.urls.baseUrl); // "https://dev-web.tezro.com/"
-    cy.url().should("eq", tezroData.urls.startUrl);
-    tezroData.userLoginData.forEach((user) => {
-      // 5 iteration (в user 5 объектов)
-      tezroFunctions.signInExecution.signinSteps(user); // auth
-      tezroFunctions.signInExecution.pinSteps(user);
-
-    });*/
-
-    cy.viewport(1800, 950).visit(tezroData.urls.startUrl);
-    cy.url().should("eq", tezroData.urls.startUrl);
-    cy.get(`${locators.signUpLocators.startPage.signInButton}`).click();
-    cy.url().should("eq", tezroData.urls.signInUrl);
-    cy.get(`${signinLoc.seedPhraseInput}`)
-    .type(`${tezroData.userLoginData[0].seedPhrase}`) // подумать, 
-    //как прикрутить функцию Лены typeTextData
-    cy.get(`${signinLoc.seedPhraseInput}`)
-      .should('contain.value', `${tezroData.userLoginData[0].seedPhrase}`)
-    cy.get(`${signinLoc.loginButton}`).click().wait(5000)
-    signinLoc.pinInput.forEach(pinCount => {
-      cy.get(`${pinCount}`).type('1')
-    })
-    signinLoc.pinInput.forEach(pinCount => {
-      cy.focused().type("1")
-    })
-    cy.wait(11000).url().should("eq", "https://dev-web.tezro.com/");
+    let userLoginDataNumber = 0
+    signIn.openSigninPage()
+    signIn.typeSeedPhrase(userLoginDataNumber)
+    signIn.enterPincode(userLoginDataNumber)
+    signIn.enterPincode(userLoginDataNumber)
+    cy.wait(3000).url().should("eq", signIn.startPage);
 
   });//it
 });//describe
 
 
-
-
 /*
-import startPage from './page_model/startpage';
-import signUp3Step from './page_model/signup3step';
-import userLoginData from './data/userLogin';
-import signIn from './page_model/signin';
-import login from './login';
-import logout from './logout';
-
-
-fixture`tezro sign in`
-  .page(configData.url)
-
-const signInSteps = async (userLoginData) => {
-  await startPage.signInUser();
-  await signIn.signInStepUser(userLoginData.seedPhrase);
-};
-const signInQRSteps = async (userLoginData) => {
-  await startPage.signInUser();
-  await signIn.signInStepUserNotQR(userLoginData.qr);
-  await signIn.signInStepUserClickSend();
-};
-const pinSteps = async (userLoginData) => {
-  await signIn.signInEnterPinUser(userLoginData.pin);
-  await signIn.signInEnterPinUser(userLoginData.pin);
-  await signUp3Step.signUp3StepUrl();
-};
-
 test('1. tezro sign in: success', async t => {
   for (const user of userLoginData.slice(0, 2)) {
     await login(user);

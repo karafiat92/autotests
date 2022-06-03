@@ -18,7 +18,7 @@ import './commands'
 
 import './elementsLocators'
 
-import './tezro_data'
+import './testData'
 
 
 
@@ -28,5 +28,6 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
   })
   
+  import '@shelex/cypress-allure-plugin'; 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
