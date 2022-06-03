@@ -1,14 +1,5 @@
 /// <reference types="cypress"/>
 
-// import tezroData from "../../support/tezro_data";
-// import tezroFunctions from "./page_model/signUpSignInLogOut.spec";
-
-// import signUp2Step from "./page_model/signup2step.spec";
-// import mainPageUser from "./page_model/main_settings.spec";
-// import locators from "../../support/elementsLocators";
-
-// let signinLoc = locators?.signInLocators.signIn;
-
 import testData from '../../support/testData';
 import settings from '../Tests/pageObjects/settingsPage';
 import signUp from '../Tests/pageObjects/signupPage';
@@ -37,11 +28,11 @@ describe("Tezro sign up", () => {
         .logout()
     })
   });
+  
   /*it("29. tezro sign up: correct user data in profile", () => {
     cy.visit(tezroData.urls.baseUrl); // "https://dev-web.tezro.com/"
        tezroFunctions.signUpExecution.signup(user); // регистрации
        checkUserData(user);
-       
   });*/
   /*
   test('2. tezro sign up: checkbox to save QR code not checked ', async t => {

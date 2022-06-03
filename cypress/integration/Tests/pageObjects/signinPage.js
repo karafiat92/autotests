@@ -2,9 +2,6 @@
 
 import testData from '../../../support/testData';
 
-// локаторы и операции по прохождению авторизации
-// на странице https://dev-web.tezro.com/login
-
 const signIn = {
 
     // локаторы
@@ -29,7 +26,9 @@ const signIn = {
     typeSeedPhrase(userLoginDataNumber) {
         cy.get(this.seedPhraseInput)
             .should("contain.value", "")
+            .wait(500)
             .type(testData.userLoginData[userLoginDataNumber].seedPhrase)
+            .wait(500)
             .should('contain.value', testData.userLoginData[userLoginDataNumber].seedPhrase)
         cy.get(this.loginButton).click().wait(2000)
     },

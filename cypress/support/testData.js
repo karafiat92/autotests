@@ -160,12 +160,12 @@ const fiat = [
 ]
 // данные по сообщениям в чате
 const messagesData = [
-    {
-        user: "Zzzz Zzzzz"
-    },
-    {
-        user: "Vvvvvv Vvvvvv"
-    },
+    // {
+    //     user: "Zzzz Zzzzz"
+    // },
+    // {
+    //     user: "Vvvvvv Vvvvvv"
+    // },
     {
         message: 'Moning, влорыол 12312 :?*()4'
     },
@@ -175,6 +175,9 @@ const messagesData = [
     {
         message: "kuku kuku"
     },
+    {
+        message: `very long message${Math.round(Math.random()*1000)}`
+    }
 ]
 // данные для регистрации нового юзера (имя, фамилия)
 const nameCurrentUser = [

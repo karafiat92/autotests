@@ -2,10 +2,6 @@
 
 import testData from '../../../support/testData';
 
-
-// локаторы и операции по прохождению регистрации
-// на странице https://dev-web.tezro.com/signup
-
 function typeTextData(selectorName, textData) {
     if (textData) {
         cy
@@ -35,9 +31,6 @@ const signUp = {
     checkboxIOathSign: "#signUpCheckIOathSign",
     pinInput: ["#pin_0", "#pin_1", "#pin_2", "#pin_3"],
     seedPhraseParagraph: ".StyledSeedPhraseModal_s1m6gcfy",
-    // стартовое состояние данных о юзере
-    // сюда положим значения после регистрации 
-    userUsername: "",
 
     // операции
     openSignupPage() {

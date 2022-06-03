@@ -1,7 +1,6 @@
 /// <reference types="cypress"/>
 
 import testData from '../../../support/testData';
-import signupPage from '../../Tests/pageObjects/signupPage';
 
 function checkFields(selectorName, selectorData) {
     cy.get(selectorName)
@@ -11,8 +10,8 @@ function checkFields(selectorName, selectorData) {
 
 const settings = {
     // локаторы
-    //main Page Locators для проверок корректности данных
-    settingsButton: "#settingsButton", // попросить прописать айдишник
+    //main Page Locators
+    settingsButton: "#settingsButton", 
     editProfileButton: '#editProfileButton',
     saveProfileButton: '#saveProfileButton',
     logOutButton: '#logOutButton',
@@ -24,7 +23,7 @@ const settings = {
     pinInput: ["#pin_0", "#pin_1", "#pin_2", "#pin_3"],
     kycButton: '#kycButton',
     name: '#myFullName',
-    //edit Profile Locators для проверок корректности данных
+    //edit Profile Locators
     firstnameInput: "#first_name",
     lastnameInput: "#last_name",
     usernameInput: "#username",
