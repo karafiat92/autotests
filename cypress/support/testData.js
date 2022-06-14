@@ -1,4 +1,3 @@
-
 // данные для прохождения различных проверок
 const baseUrl = "https://dev-web.tezro.com/";
 
@@ -37,7 +36,8 @@ const sendCryptoData = [
         recipientName: "Fashio sTudenT",
         externalMin: 0.01,
         currencyabbreviation: "ETH",
-        currencyName: "Ethereum"
+        currencyName: "Ethereum",
+        direction: "Sent"
     },
     {
         address: "0xb6A6B94a87D05fe771912783a2BA65DB2dFa5Ea7",
@@ -46,7 +46,8 @@ const sendCryptoData = [
         externalMin: 0.01,
         currencyabbreviation: "ETH",
         currencyName: "Ethereum",
-        commission: 0.01
+        commission: 0.01,
+        direction: "Sent"
     }
 ]
 // данные по кошелькам

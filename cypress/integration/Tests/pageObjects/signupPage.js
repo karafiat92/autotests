@@ -16,7 +16,6 @@ function typeTextData(selectorName, textData) {
             .should("contain.value", textData);
     }
 }
-
 const signUp = {
     // локаторы
     signUpButton: "#signupButton",
