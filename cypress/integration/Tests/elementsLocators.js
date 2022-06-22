@@ -1,5 +1,42 @@
 
 // локаторы для доступа к элементам на разных страницах
+// СТАРЫЕ РЕШЕНИЯ
+// ЧТОБЫ НЕ ПОТЕРЯТЬ
+// Попробовать для сравнения значения при совершении транзакции
+  // cy.get('#num-example .messages').should(($el) => {
+  //   const n = parseInt($el.text())
+  //   expect(n, 'number of messages')
+  //     .to.be.a('number')
+  //     .and.be.within(0, 10)
+  // })
+
+  // Работает, можно переиспользовать для проверки текста
+  //   cy.get('@balance').then((bal)=>{
+  //     let texti = bal
+  // Возвращает текст, охохо
+  //     cy.wrap(texti).as('texti')
+  //     })
+  //   cy.get('@texti').then(texti => {
+  //     expect(texti).to.contain(balanceString)
+  //  });
+
+  // Написание сообщения
+  // let messagg = "qqqdsfgsdfgsdffgdsfgsdfgsdfg ggdsfgdfgdsdfgdfgdfgdsfttt"
+  // // Пишем текстовое сообщение
+  // cy.get("#messageFieldValue")
+  // .focus()
+  // .should("be.enabled")
+  // .type(messagg)
+  // .invoke('val').as('aliasWithText')
+  // cy.get("#messageFieldValue").type("{enter}");
+
+  // cy.get('@aliasWithText').then(() => {
+  //   cy.get("p[class='messageTextItem MessageClassStyle_m2dsqsi StyleText_svkxk8i']")
+  // .last()
+  // .invoke('text')
+  // .should("eq", messagg)
+  // })
+
 
 
     //локаторы регистрации

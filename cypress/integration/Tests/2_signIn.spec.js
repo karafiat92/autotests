@@ -1,14 +1,6 @@
 
 ///<reference types="cypress"/>
 
-// import tezroData from '../../support/tezro_data';
-// import tezroFunctions from "./page_model/signUpSignInLogOut.spec";
-// import checkUserData from './page_model/checkUserData.spec'
-// import signUp2Step from './page_model/signup2step.spec'
-// import mainPageUser from './page_model/main_settings.spec'
-// import locators from '../../support/elementsLocators'
-
-// let signinLoc = locators?.signInLocators.signIn
 import signIn from './pageObjects/signinPage';
 
 
@@ -22,7 +14,7 @@ describe("Authorisation in Web Tezro", () => {
     signIn.enterPincode(userLoginDataNumber)
     cy.wait(3000).url().should("eq", signIn.startPage);
 
-  });//it
+  });
 });//describe
 
 
