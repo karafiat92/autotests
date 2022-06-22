@@ -72,7 +72,17 @@ const chat = {
     return this;
   },
   openChatWithUser(name) {
-    cy.get(this.chatsList)
+    if (name == "Support" || name === "Exchange") {
+      cy.wait(1000)
+      .get("button")
+      .contains(name)
+      // .should("be.enabled")
+      .click({ force: true });
+    cy.get(this.startChatBackgroundText)
+    .should("not.exist");
+    } else {
+      cy.wait(1000)
+      .get(this.chatsList)
       .contains(name)
       .find("button")
       .should("be.visible")
@@ -80,6 +90,7 @@ const chat = {
       .click({ force: true });
     cy.get(this.startChatBackgroundText)
     .should("not.exist");
+    }
     return this;
   },
   findUser(user) {

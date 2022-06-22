@@ -28,6 +28,132 @@ const userGlobalSearch = {
     message: ""
 }
 
+const supportQuestions = [
+    "Hello",
+    "Can you help me?",
+    "I have a problem",
+    "i have a question",
+    "How can i transfer money / How to recharge my wallet?",
+    "Transfer fiat to Tezro",
+    "Transfer crypto to Tezro",
+    "Transfer money to another Tezro user",
+    "Withdraw crypto from Tezro",
+    "Withdraw fiat from Tezro",
+    "Which currencies do you have",
+    "I found a bug, what do i do?",
+    "What does escrow mean?",
+    "how can i add my friend?",
+    "how can i invite my friend to Tezro?",
+    "Why do i have to enter pin-code all the time?",
+    "Why do i create new pin-code every login?",
+    "What are gift cards used for?",
+    "Which devices Tezro supports?",
+    "Is there any transaction restrictions?",
+    "Is there any commission to transactions? / How much do i have to pay for transactions?",
+    "crypto top-up commission",
+    "withdraw crypto commission",
+    "fiat recharge commission",
+    "fiat withdraw comission",
+    "can't find a person, what's the problem?",
+    "this  doesn't work",
+    "can i change my username / nickname?",
+    "how can i restore my pin-code ",
+    "how can i restore my seed-phrase",
+    "I made the transaction by mistake, can i cancel it",
+    "I made the transaction by mistake what can i do now",
+    "How can i exсhange my currencies",
+    "Can i pay from Tezro in shop",
+    "What does cryptocurrency mean",
+    "What bot can do",
+    "Somebody once told me",
+    "Is this a bot?",
+    "How can i contact operator",
+    "Contact real support",
+    "Dark theme in app",
+    "What are verification limits",
+    "App version",
+    "How is your system working",
+    "How are you",
+    "Why sometimes the app work very slow",
+    "Can you check please",
+    "What is your name",
+    "can i email someone",
+    "how is exchange working",
+    "how much is 2x2",
+    "how to make money",
+    "buy coins",
+    "buy crypto",
+    "change to",
+    "pay for goods",
+    "change my email address",
+    "change username",
+    "how to use auctions",
+    "Support, are you calculator?"
+]
+
+const supportAnswers = [
+    "Hello, how can i help you?",
+    "Hello, how can i help you?",
+    "Hello, what is your problem?",
+    "Hello, what is your question?",
+    "Hello, please clarify, which transfer method do you want to know about? Options are: transfer fiat to Tezro, transfer crypto to Tezro, transfer money to another Tezro user, withdraw crypto from Tezro, withdraw fiat from Tezro.",
+    "Hello, you can recharge your Tezro fiat account from any card, to do so open your wallets (from the bottom menu), click on fiat button (2 cards on top), add card to Tezro and you can recharge your fiat balance anytime from that card, or you can also add another card if you want!",
+    `Hello, to top up your crypto balance go to your wallets (from the bottom menu), choose crypto you want to replenish, click on "Get" on the bottom of the chosen crypto wallet. There you can copy your wallet number to transfer crypto to Tezro. You could also enter the sum and scan QR code to easy transfer from another wallet, or share this QR to any social network for other people to top up your balance`,
+    "Hello, to transfer money to another Tezro user, open the chat with them and click on the Bitcoin button on the bottom-left. Choose the currency you want to transfer, enter the sum and click arrow to send it. The money inside Tezro will be transfered instantly!",
+    "Hello, to withdraw crypto from Tezro go to your wallets (from the bottom menu), choose the currency you want to withdraw and click Send. There you can enter the sum and wallet address to withdraw crypto. Make sure to check the address you enter for any errors, or the currency could be lost forever!",
+    "Hello, the option to withdraw fiat is unavailable at the moment, stay tuned for the updates, we are working on it!",
+    "Hello, to check the list of the active currencies open your wallents (from the bottom menu), you can always check the supported currencies there.",
+    "Hello, to report a bug contact support, using the button below and explain under which circumstances you are encountering this error and which client you are using (ios, android, web, desktop)?",
+    "Hello, escrow is the secured type of transactions used inside Tezro. You can transfer the money for any service to another user using escrow. User will recieve money only after your confirmation of completing the provided service.",
+    `Hello, you can add a contact to your list by phone number (contact button in the upper menu, then click "+" button), or find them by username from the chat list, then send them a message in Tezro to start chatting.`,
+    `Hello, you can invite your friends to Tezro from the contacts screen in the upper menu, click on the "invite friend" button there and by using "share Tezro" option you can send an invite link to any social network to your friends.`,
+    "Hello, we ask users to confirm all the currency operation by entering pin-code for security reasons, if someone steals your device it will be impossible to withdraw money without knowing the current pin-code.",
+    "Hello, for every new authorisation we ask users to create another pin-code for security reasons. Pin-code is a temporary password used for current session only.",
+    "Hello, you can create gift cards and send it to your friend to invite them to Tezro and become your subscriber. Click on the gift button in the upper menu and start sending gifts!",
+    "Hello, you can install mobile version of Tezro on android, ios or use desktop version designed for macOS. Also there is web-version optimized for windows PC.",
+    "Hello, there is no restrictions, you can transfer any currency supported in Tezro anywhere and to anyone.",
+    "Hello, there is no comission for transfers inside Tezro. To learn about outside commissions ask directly: top-up comissions, withdraw crypto commission, recharge fiat commission, withdraw fiat comission",
+    "Hello, there is no commission in Tezro to top-up your crypto wallet, you only need to pay for the blockchain commission to create transaction.",
+    "Hello, there is a small comission in Tezro for crypto withdrawal of 0.01%",
+    "Hello, there is no commission in Tezro for recharging operation, however, there is a small fee taken by the bank. You can check the exact amount when you try to recharge Tezro wallet from card",
+    "Hello, the option to withdraw fiat is unavailable at the moment, stay tuned for the updates, we are working on it!",
+    "Hello, if you cannot find a person knowing the username make sure there the spelling is correct. Also maybe the person is hidden from search. You can enable this option for yourself from the settings > security menu.",
+    "Hello, if the problem you describing repeats inself please contact the operator using the button below.",
+    "Hello, to change your username go to the settings, open your profile (button with your first and last names, phone number and username) click on the username to open the edit username screen",
+    "Hello, your pin-code is unique for each session, if you forgot you pin-code, try to logout and create another pin-code after entering your seed-phrase / scanning QR",
+    "Hello, you can check your seed-phrase in the settings menu, click on seed-phrase button there and enter your current pin-code to reveal the phrase. Make sure you copy it somewhere safe afterwards. In case you forgot your pin-code, unfortunatelly your seed-phrase can no longer be restored",
+    "Hello, please try to contact the operator with the details of the transaction. Tezro will try to help you in than case. To make sure you can always cancel your transaction use escrow.",
+    "Hello, please try to contact the operator with the details of the transaction. Tezro will try to help you in than case. To make sure you can always cancel your transaction use escrow.",
+    "Hello, to exhange your currencies you can try our Exchange chat. The you can create offers to another users, or try the convert function to convert one currency to another inside Tezro",
+    "Hello, you can only pay in shop's connected to Tezro, to confirm please ask the shop representative",
+    `Hello, cryptocurrency is a form of payment that can be exchanged online for goods and services. Many companies have issued their own currencies, often called tokens, and these can be traded specifically for the goods or services that the company provides.`,
+    "Hello, i can answer simple questions about Tezro. Try asking me about commissions, seed-phrase, supporting devices, gift cards or any other Tezro modules.",
+    "The world is gonna roll me... anyways, can i help you?",
+    "Hello, yes, i am a programm, designed for answering simple questions about commissions, seed-phrase, supporting devices, gift cards or any other Tezro modules.",
+    "Hello, to request an operator use the button in the bottom menu. Your question will be answered shortly.",
+    "Hello, to request an operator use the button in the bottom menu. Your question will be answered shortly.",
+    "Hello, to activate dark theme go to setting (gear icon) > appearance and choose dark color theme.",
+    `Hello, to check your withdraw verification limits proceed to settings > verification level and click on "!" in the upper menu. You can also read about verification documents there.`,
+    "Hello, to check your app version navigate to the settings (gear icon) and scroll to the bottom. App version should be shown there.",
+    "Hello, Tezro is working just fine, do you have any specific questions?",
+    "Hello, i'm fine, what about you?",
+    "Hello, we are working on optimisation of our app, please contact the operator using the button below and tell us where exactly it is slow? Under which conditions do you encounter the slow work?",
+    "Hello, to request answering specific question pls contact the operator using the button below.",
+    "Hello, i have no name, can i help you?",
+    "Hello, you can send messages to any email address from Tezro. To do so click on the mail icon in the bottom menu, then click on pencil on top, enter email address, subject and your message. Email will be sent shortly after.",
+    "Hello, in exchange chat you can create exchange offers to other users. They can make offers in response and after both of you accept them the trade will happen.",
+    "Hello 2x2=5, i am not a calculator allright? Any other questions?",
+    "Hello, to make money in Tezro there are a lot of options. You can trade crypto in exchange, open a shop in Markets or sell your assets on Auction. Soon you will be also able to invest money in Tezro DeFi.",
+    "Hello, you can recharge your Tezro fiat account from any card and then try to make an exchange offer in exchange chat to receive your first crypto.",
+    "Hello, you can recharge your Tezro fiat account from any card and then try to make an exchange offer in exchange chat to receive your first crypto.",
+    "Hello, you can use exchange chat to create offers using crypto and fiat currencies. Other users should create responding offers to trade you currencies.",
+    "Hello, you can buy goods in Tezro Market or on Auctions using your Tezro wallet, or you can just bind a card to Tezro and pay from it.",
+    "Hello, you cannot change your email address after registration in Tezro. This decision is permanent.",
+    "Hello, you can change your username anytime from your user profile.",
+    "Hello, you can sell your assets on Tezro auction. There are 2 types of distribution: 100% auction type where you sell you completely selling your asset and 49% exchange type when users can buy each percent for a different price. On auction there is a timer, when it expires the max bid wins and the ownership transfers to winner. On burse the ownership remains the same, but users can resell owned percents again and again for a different price.",
+    "Hello, unfortunately i cannot answer this question, please contact the operator if you still need help."
+]
+
 // Данные для отправки транзакции с экрана Send
 const sendCryptoData = [
     {
@@ -177,7 +303,7 @@ const messagesData = [
         message: "kuku kuku"
     },
     {
-        message: `very long message${Math.round(Math.random()*1000)}`
+        message: `very long message${Math.round(Math.random() * 1000)}`
     }
 ]
 // данные для регистрации нового юзера (имя, фамилия)
@@ -382,35 +508,35 @@ const userSignUpData = [
         username: `testuser1_${Math.trunc((Math.random() * 1000000))}`,
         pin: "2",
     },
-        {
-            firstname: "Jondwrth Jonsetor",
-            lastname: "Kronwrth Kronsetor",
-            username: `testuser2_${Math.trunc((Math.random()*1000000))}`,
-            pin: "4",
-    
-        },
-        /*
-        {
-            firstname: "Jonwrth-Jonsor",
-            lastname: "Kronwrth-Kronsor",
-            username: `testuser3_${Math.trunc((Math.random()*1000000))}`,
-            pin: "4",
-    
-        },
-        {
-            firstname: "Jonwrt_Jonsor",
-            lastname: "Kronwrt_Kronsor",
-            username: `testuser4_${Math.trunc((Math.random()*1000000))}`,
-            pin: "4",
-    
-        },
-        {
-            firstname: "Jon11swrtor",
-            lastname: "Kron22swrtor",
-            username: `testuser5_${Math.trunc((Math.random()*1000000))}`,
-            pin: "4",
-    
-        },*/
+    {
+        firstname: "Jondwrth Jonsetor",
+        lastname: "Kronwrth Kronsetor",
+        username: `testuser2_${Math.trunc((Math.random() * 1000000))}`,
+        pin: "4",
+
+    },
+    /*
+    {
+        firstname: "Jonwrth-Jonsor",
+        lastname: "Kronwrth-Kronsor",
+        username: `testuser3_${Math.trunc((Math.random()*1000000))}`,
+        pin: "4",
+ 
+    },
+    {
+        firstname: "Jonwrt_Jonsor",
+        lastname: "Kronwrt_Kronsor",
+        username: `testuser4_${Math.trunc((Math.random()*1000000))}`,
+        pin: "4",
+ 
+    },
+    {
+        firstname: "Jon11swrtor",
+        lastname: "Kron22swrtor",
+        username: `testuser5_${Math.trunc((Math.random()*1000000))}`,
+        pin: "4",
+ 
+    },*/
 ]
 
 export default tezroData = {
@@ -426,5 +552,7 @@ export default tezroData = {
     userLoginData,
     userSignUpData,
     userGlobalSearch,
-    sendCryptoData
+    sendCryptoData,
+    supportAnswers,
+    supportQuestions
 }

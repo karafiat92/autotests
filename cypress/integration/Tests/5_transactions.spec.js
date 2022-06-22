@@ -7,7 +7,6 @@ import signIn from "./pageObjects/signinPage";
 import main from "./pageObjects/mainPage";
 import config from "../tezroConfigs/cryptoWalletsConfigs";
 import wallet from "./pageObjects/walletPage";
-let signinLoc = locators?.signInLocators.signIn;
 let sendCrypto = testData.sendCryptoData;
 
 let foundUser = "Mr Spell"

@@ -1,5 +1,4 @@
 ///<reference types="cypress"/>
-import testData from '../../support/testData';
 import chat from '../Tests/pageObjects/chatPage'
 import signIn from '../Tests/pageObjects/signinPage'
 
