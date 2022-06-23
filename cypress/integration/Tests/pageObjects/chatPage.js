@@ -30,6 +30,7 @@ const chat = {
   menuWindow: "div[role='menu']",
   menuItem: "div[role='menuitem']",
   closedChatBackgroundText: "Choose who you would like to write to",
+  deleteModalText: "Delete this chat?",
   // TRANSACTIONS
   currencyButton: "#currencyButton",
   walletsListModal: ".ReactModal__Content",
@@ -51,6 +52,7 @@ const chat = {
   createGroupData: 'div[class="StyledSelectedBlock_s15i499r"]',
   groupDataModal: 'form[class="StyledNewGroupModal_s468f18"]',
   groupNameInput: "#newGroupName",
+
 
   // actions
   // CHATS
@@ -263,14 +265,11 @@ const chat = {
     return this;
   },
   // CONTEXT MENU
-  openContextMenu(messageText, menuItem) {
+  openMessageContextMenu(messageText) {
     this.getMessageItChat(messageText)
     .rightclick({ force: true });
     cy.get(this.menuWindow)
     .should("be.visible");
-    cy.get(".react-contexify__item__content")
-      .contains(menuItem)
-      .click({ force: true });
     return this;
   },
   chooseContextMenuItem(menuItem) {
@@ -399,7 +398,10 @@ const chat = {
   addMembersBeforeGroupCreated(name, amount) {
     cy.get(this.searchField)
     .should("be.enabled")
-    .type(`${name}{enter}`);
+    .focus()
+    .wait(1500)
+    .type(`${name}{enter}`)
+    .wait(1500);
     cy.get(this.resultSearchList)
       .children("div")
       .then(($chat) => {
@@ -487,6 +489,33 @@ const chat = {
       .last()
       .should("have.text", `${name}${amount + 1} members`);
     return this;
+  },
+  openChatContextMenu(groupName){
+    cy.get(this.chatsList)
+    .contains(groupName)
+    .rightclick()
+    .wait(500)
+    cy.get(this.menuWindow)
+    .should("exist")
+    .and("be.visible")
+    .find(this.menuItem)
+    .contains("Delete")
+    return this
+  },
+  deleteChat(chatName){
+    cy.get(this.dialogWindow)
+    .should("exist")
+    .and("be.visible")
+    .and("contain.text", this.deleteModalText)
+    .find("button")
+    .contains("Delete")
+    .should("be.visible")
+    .and("be.enabled")
+    .click()
+    cy.get(this.chatsList)
+    .contains(chatName)
+    .should("not.exist")
+    return this
   },
 };
 export default chat;

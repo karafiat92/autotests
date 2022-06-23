@@ -27,7 +27,8 @@ describe("User's chat and message's context menu", () => {
       chat.chatClosedCheck()
       .openFirstChat()
       .sendMessage(messageForTyping)
-      .openContextMenu(messageForTyping, "Edit")
+      .openMessageContextMenu(messageForTyping)
+      .chooseContextMenuItem("Edit") 
       .editMessageText(messageForTyping, editText)
       .findEditMessage(messageForTyping + editText)
       chat.clearHistory()
@@ -37,7 +38,8 @@ describe("User's chat and message's context menu", () => {
       chat.chatClosedCheck()
       .openFirstChat()
       .getInterlocutorName()
-      .openContextMenu(messageForTyping, "Forward")
+      .openMessageContextMenu(messageForTyping)
+      .chooseContextMenuItem("Forward") 
       .makeChoiceInDialogsForShare(forwardRecipient)
       .openFirstChat()
       .findForwardMessage(messageForTyping)
@@ -47,7 +49,8 @@ describe("User's chat and message's context menu", () => {
     it("4. Message's context menu: REPLY", () => {
       chat.chatClosedCheck()
       .openFirstChat()
-      .openContextMenu(messageForTyping, "Reply")
+      .openMessageContextMenu(messageForTyping)
+      .chooseContextMenuItem("Reply") 
       .typingAMessage("newMessage")
       .getMessageItChat("newMessage")
       chat.clearHistory()
@@ -60,7 +63,8 @@ describe("User's chat and message's context menu", () => {
       // баг на вебе при открытия чата с пустой перепиской
       // поэтому перед удалением отправляем ещё одно, чтобы переписка не была пустой
       .sendMessage(firstMessageForChatExistence)
-      .openContextMenu(messageForTyping, "Delete")
+      .openMessageContextMenu(messageForTyping, "Delete")
+      .chooseContextMenuItem("Delete") 
       .deleteMessage(messageForTyping)
   });
 });//describe

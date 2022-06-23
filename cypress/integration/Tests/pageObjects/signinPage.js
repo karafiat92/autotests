@@ -18,7 +18,8 @@ const signIn = {
             .visit(testData.urls.startUrl);
         cy.url()
             .should("eq", testData.urls.startUrl);
-        cy.get(this.signInButton)
+        cy.get("button")
+            .contains("Log in dev")
             .click();
         cy.url()
             .should("eq", testData.urls.signInUrl);

@@ -39,7 +39,7 @@ describe("Sending transactions", () => {
     signIn.enterPincode(userLoginDataNumber);
     signIn.enterPincode(userLoginDataNumber);
   });
-  xit("Sending transaction in privat chat", () => {
+  it("Sending transaction in privat chat", () => {
     chat.findUser(foundUser)
     .openWalletsList()
     .chooseWallet(sendCrypto[0].currencyabbreviation)
@@ -53,7 +53,7 @@ describe("Sending transactions", () => {
     .sendMessage(message)
   });
   
-  xit("Sending escrow transaction in privat chat", () => {
+  it("Sending escrow transaction in privat chat", () => {
     cy.wait(2000)
     chat.findUser(foundUser)
     .openWalletsList()
@@ -72,7 +72,7 @@ describe("Sending transactions", () => {
     .sendMessage(message)
   })
   
-  xit("Sending internal transaction on Send screen", () => {
+  it("Sending internal transaction on Send screen", () => {
     cy.log(config.ETH.limits.internal)
     // Открываем кошельки
     main.openWallets()

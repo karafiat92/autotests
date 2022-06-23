@@ -5,7 +5,7 @@ import signIn from "../Tests/pageObjects/signinPage";
 
 let groupName = `group number ${Math.round(Math.random() * 1000)}`;
 let membersAmount = 2;
-let userForSearch = "rab"
+let userForSearch = "ra"
 
 describe("Group chat", () => {
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe("Group chat", () => {
     signIn.enterPincode(userLoginDataNumber);
   });
 
-  it("1. Create group chat", () => {
+  it("1. Create and delete a group chat", () => {
     chat
       .openCreateGroupWindow()
       .addMembersBeforeGroupCreated(userForSearch, membersAmount)
@@ -24,5 +24,8 @@ describe("Group chat", () => {
       .fillGroupData(groupName)
       .openCreatedGroup(groupName)
       .checkGroupData(groupName, membersAmount)
+      .openChatContextMenu(groupName)
+      .chooseContextMenuItem("Delete")
+      .deleteChat(groupName)
   }); 
 }); //describe

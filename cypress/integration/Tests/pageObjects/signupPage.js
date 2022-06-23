@@ -18,7 +18,7 @@ function typeTextData(selectorName, textData) {
 }
 const signUp = {
     // локаторы
-    signUpButton: "#signupButton",
+    signUpButton: "#loginButton",
     saveQRButton: "#SeedPhraseQRCodeDowloadPNG",
     saveTextButton: "#SeedPhraseQRCodeDowloadTXT",
     checkboxSavedSeed: "#signUpChecksaved",
@@ -37,7 +37,8 @@ const signUp = {
             .visit(testData.urls.startUrl);
         cy.url()
             .should("eq", testData.urls.startUrl);
-        cy.get(this.signUpButton)
+        cy.get("button")
+            .contains("Sign up dev")
             .click();
         cy.url()
             .should("eq", testData.urls.signUpUrl);
