@@ -6,6 +6,8 @@ const main = {
 // locators
 // SIDEBAR
 walletsButton: "#walletsButton",
+emailButton: "",
+giftButton: "",
 
     openWallets(){
     cy.get(this.walletsButton)
@@ -15,5 +17,13 @@ walletsButton: "#walletsButton",
     return this
     },
 
+    openEmails(){
+        cy.get("p")
+        .contains("Emails")
+        .should("be.visible")
+        .click()
+        return this
+        },
+        
 };
 export default main;

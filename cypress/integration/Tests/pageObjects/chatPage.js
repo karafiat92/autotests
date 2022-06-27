@@ -75,7 +75,7 @@ const chat = {
   },
   openChatWithUser(name) {
     if (name == "Support" || name === "Exchange") {
-      cy.wait(1000)
+      cy.wait(2000)
       .get("button")
       .contains(name)
       // .should("be.enabled")

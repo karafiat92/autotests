@@ -7,6 +7,7 @@ import signIn from "./pageObjects/signinPage";
 import main from "./pageObjects/mainPage";
 import config from "../tezroConfigs/cryptoWalletsConfigs";
 import wallet from "./pageObjects/walletPage";
+let signinLoc = locators?.signInLocators.signIn;
 let sendCrypto = testData.sendCryptoData;
 
 let foundUser = "Mr Spell"
@@ -72,14 +73,10 @@ describe("Sending transactions", () => {
     .sendMessage(message)
   })
   
-  it("Sending internal transaction on Send screen", () => {
+  it.only("Sending internal transaction on Send screen", () => {
     cy.log(config.ETH.limits.internal)
-    // Открываем кошельки
     main.openWallets()
-    // Открываем историю транзакций эфира    
-    //Запоминаем сумму на кошельке
     wallet.openTransactionHistory(sendCrypto[0].currencyName)
-    // Открываем экран Send
     .openSendScreen()
     .fillingAddressAndAmount(sendCrypto[0].address, externalCyrrencyMin, externalTransactionAmount)
     .createExternalTransaction(sendCrypto[0].recipientName, sendCrypto[0].modalText, sendCrypto[0].address)
@@ -92,7 +89,7 @@ describe("Sending transactions", () => {
       sendCrypto[0].currencyabbreviation,
       sendCrypto[0].direction
     )
-  }); // it
+  }); 
   it("Sending external transaction on Send screen", () => {
     const commission = new BigNumber(externalTransactionAmount)
       .multipliedBy(config.ETH.commission.output)

@@ -88,7 +88,7 @@ const supportQuestions = [
     "change my email address",
     "change username",
     "how to use auctions",
-    "Support, are you calculator?"
+    "qwesdfgfgdfgrt34 g5t54t54t45t"
 ]
 
 const supportAnswers = [
