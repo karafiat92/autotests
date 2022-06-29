@@ -1,5 +1,5 @@
 // конфиг с лимитами и комиссиями по всем валютам
-let ETH
+let ETH 
 let cryptoWalletsConfigs = [
   ETH = {
     limits: {
@@ -14,4 +14,6 @@ let cryptoWalletsConfigs = [
       },
   },
 ]
-export default cryptoWalletsConfigs = {ETH};
+export default cryptoWalletsConfigs = {
+    ETH
+};

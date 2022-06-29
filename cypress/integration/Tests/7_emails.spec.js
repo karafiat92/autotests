@@ -5,12 +5,16 @@ import testData from "../../support/testData";
 import main from "./pageObjects/mainPage";
 import emails from "./pageObjects/emailsPage";
 
-const existedExternalAddress = "tezroDevEmailAddress@mailto.plus";
+const existedExternalAddress = "e.antonova@ilink.dev";
 const existedInternalAddress = "spell@mio.i-link.pro";
-let randomInternalAddress = `internalAddress${Math.round(Math.random() * 1000)}@mio.i-link.pro`;
-let randomExternalAddress = `externalAddress${Math.round(Math.random() * 1000)}@gmail.com`;
+const recipientEmailMessageName = "Mr Spell"
+let randomInternalAddress = `internaladdress${Math.round(Math.random() * 1000)}@mio.i-link.pro`;
+let randomExternalAddress = `externaladdress${Math.round(Math.random() * 1000)}@gmail.com`;
 
-describe("Tezro Support testing", () => {
+let randomSubject = `subject № ${Math.round(Math.random() * 1000)}`;
+let randomMessage = `message № ${Math.round(Math.random() * 1000)}`;
+
+describe("Sending a message to email-address", () => {
     beforeEach(() => {
       let userLoginDataNumber = 0;
       signIn.openSigninPage();
@@ -19,10 +23,37 @@ describe("Tezro Support testing", () => {
       signIn.enterPincode(userLoginDataNumber);
     });
 
-    it("1. Sending message to external email-address", ()=> {
+    it("2. Sending a message to existed internal email-address", ()=> {
         cy.wait(3000)
         main.openEmails()
         emails.openCreatingNewEmailModal()
+        .enterEmailAddress(existedInternalAddress)
+        .enterEmailSubject(randomSubject)
+        .enterEmailMessage(randomMessage)
+        .sendNewEmailModal()
+        .openEmailChat(recipientEmailMessageName)
+        .findMessageInEmailChat(randomSubject, randomMessage)
+        .openEmailMessageContextMenu (randomMessage)
+        .chooseContextMenuItem("Delete") 
+        .deleteEmailMessage()
+        .checkEmailMessageWasDeleted(randomSubject, randomMessage)
+        
     })
+    it("1. Sending a message to existed external email-address", ()=> {
+        cy.wait(3000)
+        main.openEmails()
+        emails.openCreatingNewEmailModal()
+        .enterEmailAddress(existedExternalAddress)
+        .enterEmailSubject(randomSubject)
+        .enterEmailMessage(randomMessage)
+        .sendNewEmailModal()
+        .openEmailChat(existedExternalAddress)
+        .findMessageInEmailChat(randomSubject, randomMessage)
+        .openEmailMessageContextMenu (randomMessage)
+        .chooseContextMenuItem("Delete") 
+        .deleteEmailMessage()
+        .checkEmailChatWasDeleted(existedExternalAddress)
+    })
+
 
 });  

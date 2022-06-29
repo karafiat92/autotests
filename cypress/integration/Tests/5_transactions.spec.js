@@ -73,7 +73,7 @@ describe("Sending transactions", () => {
     .sendMessage(message)
   })
   
-  it.only("Sending internal transaction on Send screen", () => {
+  it("Sending internal transaction on Send screen", () => {
     cy.log(config.ETH.limits.internal)
     main.openWallets()
     wallet.openTransactionHistory(sendCrypto[0].currencyName)

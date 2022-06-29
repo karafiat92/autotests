@@ -51,7 +51,7 @@ describe("User's chat and message's context menu", () => {
       .openFirstChat()
       .openMessageContextMenu(messageForTyping)
       .chooseContextMenuItem("Reply") 
-      .typingAMessage("newMessage")
+      .sendMessage("newMessage")
       .getMessageItChat("newMessage")
       chat.clearHistory()
       .sendMessage(messageForTyping)

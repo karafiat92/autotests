@@ -4,6 +4,10 @@ import signIn from "../Tests/pageObjects/signinPage";
 import testData from "../../support/testData";
 let messageToSupport = testData.supportQuestions;
 let messageFromSupport = testData.supportAnswers;
+//const amountOfMessagesForSupport = messageToSupport.length - 1;
+const numberOfStartMessageFromQuestionsArray = 0;
+const numberOfLastMessageFrowQuestionsArray = 1;
+
 describe("Tezro Support testing", () => {
   beforeEach(() => {
     let userLoginDataNumber = 0;
@@ -13,27 +17,16 @@ describe("Tezro Support testing", () => {
     signIn.enterPincode(userLoginDataNumber);
   });
 
-  it.only("Send a specific message to the Support to get a specific answer", () => {
-    // let i = 0;
-    // chat.chatClosedCheck().openChatWithUser("Support");
-    // messageToSupport.forEach((message) => {
-    //   chat.sendMessage(message);
-    //   cy.wait(10000).log("Itteration: " + i);
-    //   chat.getMessageItChat(messageFromSupport[i]).should("exist");
-    //   chat
-    //     .openMessageContextMenu(messageFromSupport[i])
-    //     .chooseContextMenuItem("Delete")
-    //     .deleteMessage(messageFromSupport[i])
-    //     .openMessageContextMenu(message)
-    //     .chooseContextMenuItem("Delete")
-    //     .deleteMessage(message);
-    //   ++i;
-    // });
-
+  // Падают, т.к. бот перестал отвечать
+  xit("Send a specific message to the Support to get a specific answer", () => {
     chat.chatClosedCheck().openChatWithUser("Support");
-    for (let i = 0; i < messageToSupport.length - 1; ++i) {
+    for (
+      let i = numberOfStartMessageFromQuestionsArray;
+      i < numberOfLastMessageFrowQuestionsArray;
+      ++i
+    ) {
       chat.sendMessage(messageToSupport[i]);
-      cy.wait(1000).log("Itteration: " + i);
+      cy.wait(10000).log("Itteration: " + i);
       chat.getMessageItChat(messageFromSupport[i]).should("exist");
       chat
         .openMessageContextMenu(messageFromSupport[i])
@@ -45,7 +38,7 @@ describe("Tezro Support testing", () => {
     }
   });
 
-  it("Send any message to the Support to get an advice to connect with an operator", () => {
+  xit("Send any message to the Support to get an advice to connect with an operator", () => {
     chat
       .chatClosedCheck()
       .openChatWithUser("Support")
