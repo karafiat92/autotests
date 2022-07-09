@@ -18,7 +18,7 @@ const signIn = {
   // actions
   // Открытие экрана авторизации
   openSigninPage() {
-    cy.viewport(1800, 950).visit(testData.urls.startUrl);
+    cy.visit(testData.urls.startUrl);
     cy.url().should("eq", testData.urls.startUrl);
     cy.get("button").contains("Log in dev").click();
     cy.url().should("eq", testData.urls.signInUrl);

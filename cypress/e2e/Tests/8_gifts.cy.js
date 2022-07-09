@@ -41,7 +41,7 @@ describe("Gift cards tests", () => {
       .openShareModal();
     chat.makeChoiceInDialogsForShare(cardRecipient);
     gift.closeCongratsModal();
-    chat.openChatWithUser(cardRecipient);
+    chat.openChatWithUser(cardRecipient)
     if (showSum == "Yes")
       chat.checkMediaQrInChat(mediaQRType, currency, giftAmount);
     else chat.checkMediaQrInChat(mediaQRType, "Surprise");

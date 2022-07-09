@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 import chat from "./pageObjects/chatPage";
 import signIn from "./pageObjects/signinPage";
 import main from "./pageObjects/mainPage";
-import config from "../tezroConfigs/cryptoWalletsConfigs";
+import config from "../Tests/tezroConfigs/cryptoWalletsConfigs";
 import wallet from "./pageObjects/walletPage";
 let signinLoc = locators?.signInLocators.signIn;
 let sendCrypto = testData.sendCryptoData;
