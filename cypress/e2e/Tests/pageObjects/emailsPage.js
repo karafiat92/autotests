@@ -1,7 +1,5 @@
 ///<reference types="cypress"/>
 
-import testData from "../../../support/testData";
-
 const emails = {
   // locators
   // Заголовок

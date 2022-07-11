@@ -63,7 +63,7 @@ describe("User's chat and message's context menu", () => {
       // баг на вебе при открытия чата с пустой перепиской
       // поэтому перед удалением отправляем ещё одно, чтобы переписка не была пустой
       .sendMessage(firstMessageForChatExistence)
-      .openMessageContextMenu(messageForTyping, "Delete")
+      .openMessageContextMenu(messageForTyping)
       .chooseContextMenuItem("Delete") 
       .deleteMessage(messageForTyping)
   });

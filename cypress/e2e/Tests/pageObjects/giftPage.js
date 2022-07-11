@@ -1,6 +1,4 @@
 ///<reference types="cypress"/>
-import testData from "../../../support/testData";
-import chat from "./chatPage";
 
 const gift = {
   // locators

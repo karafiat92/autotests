@@ -1,2 +1,4 @@
-./tezrotest_cypress
-./downloads
+/tezrotest_cypress
+/downloads
+/node_modules
+package-lock.json

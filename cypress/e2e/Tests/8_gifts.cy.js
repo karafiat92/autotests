@@ -1,7 +1,6 @@
 ///<reference types="cypress"/>
 import chat from "../Tests/pageObjects/chatPage";
 import signIn from "../Tests/pageObjects/signinPage";
-import testData from "../../support/testData";
 import BigNumber from "bignumber.js";
 import main from "./pageObjects/mainPage";
 import gift from "./pageObjects/giftPage";
@@ -24,6 +23,7 @@ describe("Gift cards tests", () => {
     signIn.enterPincode(userLoginDataNumber);
     signIn.enterPincode(userLoginDataNumber);
   });
+
   it("1. Create gift card and share after the creation", () => {
     main.openGifts();
     gift

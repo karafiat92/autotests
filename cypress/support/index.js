@@ -16,10 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
-import './elementsLocators'
-
 import './testData'
-
 
 
 Cypress.on('uncaught:exception', (err, runnable) => {

@@ -1,5 +1,4 @@
 ///<reference types="cypress"/>
-import testData from "../../../support/testData";
 import BigNumber from "bignumber.js";
 
 const wallet = {

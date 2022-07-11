@@ -10,7 +10,7 @@ viewportWidth: 1800,
     },
   },
   e2e: {
-    baseUrl: 'http://localhost:62479'
+    baseUrl: 'http://localhost:1234'
   },
   e2e: {
     setupNodeEvents(on, config) {

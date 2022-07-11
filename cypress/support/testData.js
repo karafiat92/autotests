@@ -1,7 +1,6 @@
 // данные для прохождения различных проверок
 const baseUrl = "https://dev-web.tezro.com/";
 
-
 let tezroData;
 
 // данные для создания контакта
@@ -396,10 +395,6 @@ const urls = {
     baseUrl: baseUrl,
     startUrl: baseUrl,
     signUpUrl: baseUrl + 'signup',
-    // хз что за адреса такие, вроде, сейчас таких нет
-    //signup2stepUrl: baseUrl + 'signup2step',
-    //signup3stepUrl: baseUrl + 'signup3step',
-    // mainUrl: baseUrl + 'main',
     settingsUrl: baseUrl + 'settings',
     editProfileUrl: baseUrl + 'settings/edit-profile',
     signInUrl: baseUrl + 'login',

@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "cypress": "^10.3.0"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.0.2",
+    "npm": "^8.13.2"
+  }
+}

@@ -305,19 +305,6 @@ const chat = {
   makeChoiceInDialogsForShare(user) {
     cy.get(this.dialogForShareModal).should("exist").and("be.visible");
     cy.get(this.listOfDialogs)
-      // отправка юзеру, с которым переписка, почему-то не срабатывает
-      // нужно будет посмотреть с Никитой
-      /*.then(($dialogs) => {
-           cy.get('@name')
-           .then(($name) => {
-            cy.get($dialogs)
-            .contains($name)
-            .parents(".StyledChatDialogMini_s1cy661g")
-            // .find('button')
-            .find(this.dialogCheckbox)
-            .click()
-           })
-        })*/
       .contains(user)
       .parents(this.listOfDialogs)
       .find(this.dialogCheckbox)
@@ -479,10 +466,6 @@ const chat = {
   // Сверяем данные группы (создатель, количество членов)
   checkGroupData(name, amount) {
     // Проверяем все данные в открытой группе
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // тащим значения из заголовка с именем юзера
-    // и сравниваем с создателем группы
-    // и не забываем дышать
     cy.get('p[class="StyleText_svkxk8i"]')
       .first()
       .invoke("text")
