@@ -4,16 +4,16 @@ npm i
 # Open Cypress 
 npx cypress open 
 
-![image](http://joxi.ru/l2ZG3WOtl1yZ4A)
+![alt text](https://github.com/karafiat92/autotests/blob/main/launch%20screens/open_cypress.jpg)
 
 # Choose a browser to launch tests
 
-![image](http://joxi.ru/eAOx5gQCvzKn1r)
+![alt text](https://github.com/karafiat92/autotests/blob/main/launch%20screens/choose_browser.jpg)
 
 # The list of tests 
 All files with a filename extension .cy.js are test files in the folder e2e/Tests/.
 
-![image](http://joxi.ru/4AkDZN4Tjg8BNr)
+![alt text](https://github.com/karafiat92/autotests/blob/main/launch%20screens/tests_list.jpg)
 
 # Launch tests
 Click on the test file.
