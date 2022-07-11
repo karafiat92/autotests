@@ -1,4 +1,4 @@
-# Initialisation 
+# Initialization 
 npm i
 
 # Open Cypress 
