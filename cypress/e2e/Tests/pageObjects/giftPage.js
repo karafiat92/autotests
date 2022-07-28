@@ -8,7 +8,7 @@ const gift = {
   // Модалка со списком гифтов
   giftModalTitleText: "Gift List",
   closeModalButton: ".CloseButton_c1ne0lt7", // Gift inforamtion too, Congratulation modal too
-  createNewCardButton: ".StyleButton_s1oa7yi9",
+  modalHeaderButton: ".StyleButton_s1oa7yi9", // + gift, Congratulation modal, close
   giftListInModal: ".StyledGiftList_sarewyw",
   // Карточка в списке гифтов
   giftItemButton: ".StyledGiftCard_s1v6ib76",
@@ -20,7 +20,7 @@ const gift = {
   // Create Gift Card
   wishInput: "#wish_text",
   createNewGiftTitleText: "Create Gift Card",
-  createNewGiftTitleSelector: ".StyledTitle_sr683lu",
+  giftModalTitle: ".StyledTitle_sr683lu",
   recipientNumberInput: "#recipients_count",
   amountInput: ".AmountClassStyle_a10u5g8i",
   radioButtonLable: ".StyledRadioButton_svh4qu8",
@@ -33,7 +33,7 @@ const gift = {
   currencyItem: ".StyledCurrency_s1646xb6",
   currencyBalance: ".chooseCurrencyModalCurrencyBalance",
   chooseCurrencyButton: ".chooseCurrency",
-  closeCurrencyButton: "",
+  closeChooseCurrencyModalBtn: "#closeChooseCurrencyModalBtn",
   // Congratulation modal
   shareButtonCongratulateModal: ".StyledShareButton_s1rh8cq9",
   congratulateTitleText: "Congratulations!",
@@ -53,25 +53,24 @@ const gift = {
   cardOnGetOwnGiftModal: ".StyledGiftCardInfo_s1i44e5s", // Create Gift Card too
   cardOwnerOnGetetOwnGiftModal: ".StyledFrom_sp5kyj0",
   okButtonOnGetCardModal: "StyledButton_ss5phhy",
-  closeButtonGetCardModal: ".StyleButton_s1oa7yi9", // Congratulation modal too
 
   // actions
   // Открытие экрана создания гифта
   openCreateNewGiftScreen() {
     cy.wait(500)
       .get(this.dialogWindow)
-      .find(this.createNewCardButton)
+      .find(this.modalHeaderButton)
       .first()
       .should("be.visible")
       .and("be.enabled")
       .click();
-    cy.get(this.createNewGiftTitleSelector).should(
+    cy.get(this.giftModalTitle).should(
       "contain.text",
       this.createNewGiftTitleText
     );
     return this;
   },
-  openCurrencyModal() {
+  openWalletsList() {
     cy.wait(100)
       .get(this.currencyButton)
       .should("be.visible")
@@ -82,15 +81,16 @@ const gift = {
       .should("exist");
     return this;
   },
-  chooseCurrency(currency, min) {
-    cy.wait(500)
+    // Выбор кошелька
+    chooseWallet(currency) {
+      cy.wait(500)
       .get(this.currencyItem)
       .contains(currency)
       .parents(this.currencyItem)
       .as("chosenCurrencyButton")
       .find(this.currencyBalance)
       .invoke("text")
-      .as("chosenCurrencyBalance");
+      .as("startBalance");
     cy.get("@chosenCurrencyButton")
       .find(this.chooseCurrencyButton)
       .should("be.enabled")
@@ -98,18 +98,55 @@ const gift = {
     cy.get(this.dialogWindow)
       .contains(this.chooseCurrencyTitle)
       .should("not.exist");
+      return this;
+    },
+  // Сравнить баланс после отправки транзакции
+  compareBalanceInWalletList(currency, transactionAmount) {
+    cy.get(this.currencyItem)
+      .contains(currency)
+      .should("exist")
+      .siblings("p")
+      .wait(3000)
+      .invoke("text")
+      .as("endBalance")
+      .then((end) => {
+        const endBalance = new BigNumber(end);
+        cy.log("new balance: " + endBalance.toNumber());
+        let transactionResult = new BigNumber(endBalance).plus(
+          transactionAmount
+        );
+        cy.get("@startBalance")
+          .then(parseFloat)
+          .then((start) => {
+            const startBalance = new BigNumber(start);
+            cy.log("old balance: " + startBalance.toNumber());
+            cy.wrap(startBalance.toNumber());
+          })
+          .should("equal", transactionResult.toNumber());
+      });
+    return this;
+  },
+  // Закрытие списка кошельков
+  closeWalletsList() {
+    cy.get(this.closeChooseCurrencyModalBtn)
+      .should("be.visible")
+      .and("be.enabled")
+      .click();
+    cy.get(this.dialogWindow).should("not.exist");
+    return this;
+  },
+  сheckInternalMinInAmountField(currency, min) {
     cy.get(this.amountInput).invoke("val").should("equal", min);
     return this;
   },
   enterWish(wish) {
-    if (wish != ""){
-    cy.get(this.wishInput)
-      .should("be.empty")
-      .and("be.enabled")
-      .type(wish)
-      .should("contain.value", wish);
-    }
-    else return this;
+    if (wish != "") {
+      cy.get(this.wishInput)
+        .should("be.empty")
+        .and("be.enabled")
+        .type(wish)
+        .should("contain.value", wish);
+    } else return this;
     return this;
   },
   enterGiftAmount(amount) {
@@ -142,7 +179,7 @@ const gift = {
       .click();
     return this;
   },
-  checkDataOnCard(currency, amount, showSum, wish) {
+  checkDataOnCardAfterCreating(currency, amount, showSum, wish) {
     cy.wait(5000)
       .get(this.dialogWindow)
       .should("contain.text", this.congratulateTitleText)
@@ -161,22 +198,104 @@ const gift = {
       })
       .get(this.qrOnCardInGiftList)
       .should("exist")
-      .and("be.visible")
+      .and("be.visible");
     return this;
   },
-  openShareModal(){
+  openShareModal() {
     cy.get(this.shareButtonCongratulateModal)
-    .should("be.visible")
-    .and("be.enabled")
-    .click()
+      .should("be.visible")
+      .and("be.enabled")
+      .click();
     return this;
   },
-  closeCongratsModal(){
+  closeCongratsModal() {
     cy.get(this.closeModalButton)
-    .should("be.visible")
-    .and("be.enabled")
-    .click()
-return this  
-},
+      .should("be.visible")
+      .and("be.enabled")
+      .click();
+    return this;
+  },
+  openFirstCardGiftInformation() {
+    cy.get(this.giftListInModal)
+      .should("be.visible")
+      .children()
+      .should("exist")
+      .first()
+      .click();
+    cy.get(this.giftInformationTitle).should("be.visible");
+    return this;
+  },
+  checkDataOnGiftInformation(currency, giftAmount, showSum, wishText) {
+    cy.get(this.giftCardOnGiftInformation)
+      .then(($card) => {
+        if (showSum == "No") {
+          cy.wrap($card).should("contain.text", "Surprise");
+        } else {
+          cy.wrap($card).should("contain.text", amount + " " + currency);
+        }
+        if (wish == "") {
+          cy.wrap($card).should("contain.text", this.defaultWishOnCard);
+        } else {
+          cy.wrap($card).should("contain.text", wish);
+        }
+      })
+      .get(this.qrOnCardInGiftList)
+      .should("exist")
+      .and("be.visible");
+    return this;
+  },
+  openGiftContextMenu(currency, giftAmount, showSum, wish) {
+    cy.get(this.giftListInModal)
+      .should("be.visible")
+      .children()
+      .should("exist")
+      .contains(currency)
+      .and(giftAmount)
+      .and("contain.text", amount + " " + currency)
+      .then(($card) => {
+        if (wish == "") {
+          cy.wrap($card).should("contain.text", this.defaultWishOnCard);
+        } else {
+          cy.wrap($card).should("contain.text", wish);
+        }
+      })
+      .rightclick();
+    return this;
+  },
+  deleteGift() {
+    return this;
+  },
+  closeGiftModal(buttonDestiny) {
+    cy.wait(500)
+      .get(this.dialogWindow)
+      .find(this.giftModalTitleText)
+      .invoke("text")
+      .as("modalTitle");
+    switch (buttonDestiny) {
+      case "Back": {
+        cy.get(this.dialogWindow)
+          .find(this.modalHeaderButton)
+          .first()
+          .should("be.visible")
+          .and("be.enabled")
+          .click();
+        break;
+      }
+      case "Close": {
+        cy.get(this.dialogWindow)
+          .find(this.modalHeaderButton)
+          .last()
+          .should("be.visible")
+          .and("be.enabled")
+          .click();
+      }
+      default: {
+        cy.log("Unknown button destiny");
+        break;
+      }
+    }
+    cy.get("@modalTitle").should("not.exist");
+    return this;
+  },
 };
 export default gift;

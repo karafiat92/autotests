@@ -1,13 +1,11 @@
 ///<reference types="cypress"/>
 import testData from "../../support/testData";
-import locators from "../../support/elementsLocators";
 import BigNumber from 'bignumber.js';
 import chat from "./pageObjects/chatPage";
 import signIn from "./pageObjects/signinPage";
 import main from "./pageObjects/mainPage";
 import config from "../Tests/tezroConfigs/cryptoWalletsConfigs";
 import wallet from "./pageObjects/walletPage";
-let signinLoc = locators?.signInLocators.signIn;
 let sendCrypto = testData.sendCryptoData;
 
 let foundUser = "Mr Spell"
@@ -40,7 +38,7 @@ describe("Sending transactions", () => {
     signIn.enterPincode(userLoginDataNumber);
     signIn.enterPincode(userLoginDataNumber);
   });
-  it("Sending transaction in privat chat", () => {
+  xit("Sending transaction in privat chat", () => {
     chat.findUser(foundUser)
     .openWalletsList()
     .chooseWallet(sendCrypto[0].currencyabbreviation)
@@ -54,7 +52,7 @@ describe("Sending transactions", () => {
     .sendMessage(message)
   });
   
-  it("Sending escrow transaction in privat chat", () => {
+  xit("Sending escrow transaction in privat chat", () => {
     cy.wait(2000)
     chat.findUser(foundUser)
     .openWalletsList()
@@ -73,7 +71,7 @@ describe("Sending transactions", () => {
     .sendMessage(message)
   })
   
-  it("Sending internal transaction on Send screen", () => {
+  xit("Sending internal transaction on Send screen", () => {
     cy.log(config.ETH.limits.internal)
     main.openWallets()
     wallet.openTransactionHistory(sendCrypto[0].currencyName)
@@ -90,7 +88,7 @@ describe("Sending transactions", () => {
       sendCrypto[0].direction
     )
   }); 
-  it("Sending external transaction on Send screen", () => {
+  xit("Sending external transaction on Send screen", () => {
     const commission = new BigNumber(externalTransactionAmount)
       .multipliedBy(config.ETH.commission.output)
 

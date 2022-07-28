@@ -2,3 +2,6 @@
 /downloads
 /node_modules
 package-lock.json
+README.md
+/allure-report
+/allure-results

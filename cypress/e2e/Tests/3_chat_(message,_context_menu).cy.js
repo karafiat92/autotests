@@ -7,15 +7,15 @@ let editText = "editt"
 let forwardRecipient = "Mr Spell"
 let firstMessageForChatExistence = "Hi"
 
+beforeEach(() => {
+  let userLoginDataNumber = 0
+  signIn.openSigninPage()
+  signIn.typeSeedPhrase(userLoginDataNumber)
+  signIn.enterPincode(userLoginDataNumber)
+  signIn.enterPincode(userLoginDataNumber)
+});
 describe("User's chat and message's context menu", () => {
-  beforeEach(() => {
-    let userLoginDataNumber = 0
-    signIn.openSigninPage()
-    signIn.typeSeedPhrase(userLoginDataNumber)
-    signIn.enterPincode(userLoginDataNumber)
-    signIn.enterPincode(userLoginDataNumber)
-  });
-  it("1. Write message in chat", () => {
+  xit("1. Write message in chat", () => {
     chat.chatClosedCheck()
         .openFirstChat()
         .sendMessage(messageForTyping)
@@ -23,7 +23,7 @@ describe("User's chat and message's context menu", () => {
         chat.clearHistory()
         .sendMessage(firstMessageForChatExistence)
     });
-    it("2. Message's context menu: EDIT", () => {
+    xit("2. Message's context menu: EDIT", () => {
       chat.chatClosedCheck()
       .openFirstChat()
       .sendMessage(messageForTyping)
@@ -34,7 +34,7 @@ describe("User's chat and message's context menu", () => {
       chat.clearHistory()
       .sendMessage(messageForTyping)
     });
-    it("3. Message's context menu: FORWARD", () => {
+    xit("3. Message's context menu: FORWARD", () => {
       chat.chatClosedCheck()
       .openFirstChat()
       .getInterlocutorName()
@@ -46,7 +46,7 @@ describe("User's chat and message's context menu", () => {
       chat.clearHistory()
       .sendMessage(messageForTyping)
     });
-    it("4. Message's context menu: REPLY", () => {
+    xit("4. Message's context menu: REPLY", () => {
       chat.chatClosedCheck()
       .openFirstChat()
       .openMessageContextMenu(messageForTyping)
@@ -56,7 +56,7 @@ describe("User's chat and message's context menu", () => {
       chat.clearHistory()
       .sendMessage(messageForTyping)
     });
-    it("5. Message's context menu: DELETE", () => {
+    xit("5. Message's context menu: DELETE", () => {
       chat.chatClosedCheck()
       .openFirstChat()
       // при удалении единственного сообщения страница падает

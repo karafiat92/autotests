@@ -15,7 +15,7 @@ describe("Group chat", () => {
     signIn.enterPincode(userLoginDataNumber);
   });
 
-  it("1. Create and delete a group chat", () => {
+  xit("1. Create and delete a group chat", () => {
     chat
       .openCreateGroupWindow()
       .addMembersBeforeGroupCreated(userForSearch, membersAmount)
@@ -27,4 +27,4 @@ describe("Group chat", () => {
       .chooseContextMenuItem("Delete")
       .deleteChat(groupName)
   }); 
-}); //describe
+}); //describe//

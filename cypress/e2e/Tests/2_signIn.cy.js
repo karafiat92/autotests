@@ -5,7 +5,7 @@ import signIn from './pageObjects/signinPage';
 
 describe("Authorisation in Web Tezro", () => {
 
-  it("1. tezro sign in: success", () => {
+  xit("1. tezro sign in: success", () => {
     let userLoginDataNumber = 0
     signIn.openSigninPage()
     signIn.typeSeedPhrase(userLoginDataNumber)

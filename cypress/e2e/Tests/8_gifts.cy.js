@@ -1,4 +1,5 @@
 ///<reference types="cypress"/>
+///<reference types="@shelex/cypress-allure-plugin" />
 import chat from "../Tests/pageObjects/chatPage";
 import signIn from "../Tests/pageObjects/signinPage";
 import BigNumber from "bignumber.js";
@@ -24,7 +25,41 @@ describe("Gift cards tests", () => {
     signIn.enterPincode(userLoginDataNumber);
   });
 
-  it("1. Create gift card and share after the creation", () => {
+  xit("1. Create a gift card and share after the creation", () => {
+    main.openGifts();
+    gift
+      .openCreateNewGiftScreen()
+      .openWalletsList()
+      .chooseWallet(currency)
+      .сheckInternalMinInAmountField(currencyMin)
+      .enterWish(wishText)
+      .enterGiftAmount(giftAmount)
+      .enterNumberOfPeople(numberOfPeople)
+      .setSplitAndShowSumTypse(sumSplit, showSum)
+      .pressCreateCardButton();
+    chat.enterPincode(0);
+    gift
+      .checkDataOnCardAfterCreating(currency, giftAmount, showSum, wishText)
+      .openShareModal();
+    chat
+      .findUserInShareModal(cardRecipient)
+      .makeChoiceInDialogsForShare(cardRecipient);
+    gift.closeGiftModal("Back")
+    .openCreateNewGiftScreen()
+    .openWalletsList()
+    .compareBalanceInWalletList(currency, currencyMin)
+    .closeWalletsList()
+    chat.openChatWithUser(cardRecipient);
+    if (showSum == "Yes")
+      chat.checkMediaQrInChat(mediaQRType, currency, giftAmount);
+    else chat.checkMediaQrInChat(mediaQRType, "Surprise");
+    if (wishText == "")
+      chat.checkMediaQrInChat(mediaQRType, gift.defaultWishOnCard);
+    else chat.checkMediaQrInChat(mediaQRType, wishText);
+    chat.clearHistory().sendMessage("hi");
+  });
+
+  xit("2. Create a gift card and share the gift card from card infirmation page", () => {
     main.openGifts();
     gift
       .openCreateNewGiftScreen()
@@ -37,18 +72,13 @@ describe("Gift cards tests", () => {
       .pressCreateCardButton();
     chat.enterPincode(0);
     gift
-      .checkDataOnCard(currency, giftAmount, showSum, wishText)
-      .openShareModal();
-    chat.makeChoiceInDialogsForShare(cardRecipient);
-    gift.closeCongratsModal();
-    chat.openChatWithUser(cardRecipient)
-    if (showSum == "Yes")
-      chat.checkMediaQrInChat(mediaQRType, currency, giftAmount);
-    else chat.checkMediaQrInChat(mediaQRType, "Surprise");
-    if (wishText == "")
-      chat.checkMediaQrInChat(mediaQRType, gift.defaultWishOnCard);
-    else chat.checkMediaQrInChat(mediaQRType, wishText);
-    chat.clearHistory()
-    .sendMessage("hi")
+      .checkDataOnCardAfterCreating(currency, giftAmount, showSum, wishText)
+      .closeGiftModal("Back");
+  });
+
+  xit("3. Own card activation", () => {});
+
+  xit("4. Delete gift card", () => {
+    // gift.openGiftContextMenu(currency, giftAmount, showSum, wishText)
   });
 });

@@ -40,6 +40,7 @@ const chat = {
   dialogCheckbox:
     'button[class="StyledButtonCheckbox_s1jjp8t8 StyleButton_s1oa7yi9"]',
   checkMarkStile: `div[style="--c1wv8s2o-0:scale(1);"]`,
+  searchFieldInShare: "#searchValue",
   // TRANSACTIONS
   // Чат с юзером
   currencyButton: "#currencyButton",
@@ -50,8 +51,10 @@ const chat = {
   sendTxFormBtn: "#sendTxFormBtn",
   // Модалка выбора валют
   walletsListModal: ".ReactModal__Content",
-  currencyListInModal: ".StyledCurrency_s1646xb6",
+  currencyItem: ".StyledCurrency_s1646xb6",
   closeChooseCurrencyModalBtn: "#closeChooseCurrencyModalBtn",
+  chooseCurrencyButton: ".chooseCurrency",
+  chooseCurrencyTitle: "Choose currency",
   // Модалка введения пинкода для эскроу
   escrowPincodeText: "Sending money under ESCROW you agree",
   pinInput: ["#pin_0", "#pin_1", "#pin_2", "#pin_3"],
@@ -163,21 +166,21 @@ const chat = {
   },
   // Выбор кошелька
   chooseWallet(currency) {
-    cy.get(this.currencyListInModal)
-      .find("p[class='StyleText_svkxk8i']")
-      .contains(currency)
-      .as(`${currency}wallet`)
-      .should("exist")
-      .siblings("p")
-      .invoke("text")
-      // Сохраняем значение баланса
-      .as("startBalance")
-      .then(parseFloat);
-    cy.get("@" + `${currency}wallet`)
-      .parents("div.StyledCurrency_s1646xb6")
-      .find("button")
-      .as(`${currency}button`)
-      .click();
+    cy.wait(500)
+    .get(this.currencyItem)
+    .contains(currency)
+    .parents(this.currencyItem)
+    .as("chosenCurrencyButton")
+    .find(this.currencyBalance)
+    .invoke("text")
+    .as("startBalance");
+  cy.get("@chosenCurrencyButton")
+    .find(this.chooseCurrencyButton)
+    .should("be.enabled")
+    .click();
+  cy.get(this.dialogWindow)
+    .contains(this.chooseCurrencyTitle)
+    .should("not.exist");
     return this;
   },
   // Закрытие списка кошельков
@@ -191,13 +194,13 @@ const chat = {
   },
   // Сравнить баланс после отправки транзакции
   compareBalanceInWalletList(currency, transactionAmount) {
-    cy.get(this.currencyListInModal)
+    cy.get(this.currencyItem)
       .find("p[class='StyleText_svkxk8i']")
       .contains(currency)
       .should("exist")
       .siblings("p")
-      .invoke("text")
       .wait(3000)
+      .invoke("text")
       .as("endBalance")
       .then((end) => {
         const endBalance = new BigNumber(end);
@@ -312,6 +315,13 @@ const chat = {
     //галочка проставилась в принципе, а не в конкретном поле, над конкретным ещё подумтаь)
     cy.get(this.checkMarkStile).should("exist");
     cy.get(this.shareModalButtons).last().click().wait(2000);
+    return this;
+  },
+  findUserInShareModal(user){
+    cy.get(this.searchFieldInShare)
+    .should("be.empty")
+    .type(user)
+    .should("have.value", user)
     return this;
   },
   // Получить имя собеседника

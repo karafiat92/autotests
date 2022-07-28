@@ -18,7 +18,7 @@ describe("Sending a message to email-address", () => {
       signIn.enterPincode(userLoginDataNumber);
     });
 
-    it("1. Sending a message to existed internal email-address", ()=> {
+    xit("1. Sending a message to existed internal email-address", ()=> {
         cy.wait(3000)
         main.openEmails()
         emails.openCreatingNewEmailModal()
@@ -35,7 +35,7 @@ describe("Sending a message to email-address", () => {
         
     })
     
-    it("2. Sending a message to existed external email-address", ()=> {
+    xit("2. Sending a message to existed external email-address", ()=> {
         cy.wait(3000)
         main.openEmails()
         emails.openCreatingNewEmailModal()

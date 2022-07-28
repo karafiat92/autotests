@@ -1,8 +1,8 @@
 // данные для прохождения различных проверок
-const baseUrl = "https://dev-web.tezro.com/";
-
 let tezroData;
 
+const baseUrl = Cypress.config("baseUrl");
+ 
 // данные для создания контакта
 const contactsData = [
     {
