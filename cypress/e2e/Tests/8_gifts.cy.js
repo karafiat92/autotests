@@ -25,7 +25,8 @@ describe("Gift cards tests", () => {
     signIn.enterPincode(userLoginDataNumber);
   });
 
-  xit("1. Create a gift card and share after the creation", () => {
+
+  it("1. Create a gift card and share after the creation", () => {
     main.openGifts();
     gift
       .openCreateNewGiftScreen()
@@ -59,6 +60,7 @@ describe("Gift cards tests", () => {
     chat.clearHistory().sendMessage("hi");
   });
 
+  // Не дописан
   xit("2. Create a gift card and share the gift card from card infirmation page", () => {
     main.openGifts();
     gift
@@ -78,7 +80,5 @@ describe("Gift cards tests", () => {
 
   xit("3. Own card activation", () => {});
 
-  xit("4. Delete gift card", () => {
-    // gift.openGiftContextMenu(currency, giftAmount, showSum, wishText)
-  });
+  xit("4. Delete gift card", () => {});
 });

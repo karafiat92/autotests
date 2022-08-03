@@ -5,8 +5,8 @@ import settings from '../Tests/pageObjects/settingsPage';
 import signUp from '../Tests/pageObjects/signupPage';
 import main from '../Tests/pageObjects/mainPage';
 
-testData.serverName = "dev"
-
+// cy.allure().step() - конструкция для задания шагов
+// которые будут отображаться в отчёте
 //все тесты по регистрация
 describe("Tezro sign up", () => {
   it("1. tezro sign up: success for 2 users", () => {

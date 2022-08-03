@@ -10,8 +10,6 @@
   "scripts": {
     "open": "npx cypress open",
     "test": "del allure-results /S /Q \nnpx cypress run --browser chrome --env allure=true",
-    "allure:report": "allure generate -c",
-    "allure:open": "allure serve",
     "test:stable": "npx cypress run --browser chrome --config baseUrl=https://stable-web.tezro.com/"
   }
 }
