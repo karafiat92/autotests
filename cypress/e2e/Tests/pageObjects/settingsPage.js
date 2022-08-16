@@ -52,7 +52,7 @@ const settings = {
     checkFields(this.usernameInput, user.username);
     return this;
   },
-  // СОхрание данных пользователя
+  // Сохрание данных пользователя
   saveProfileData() {
     cy.url().should("eq", testData.urls.editProfileUrl);
     cy.get(this.saveButton).click().wait(2000);

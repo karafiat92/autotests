@@ -397,7 +397,7 @@ const urls = {
     signUpUrl: baseUrl + 'signup',
     settingsUrl: baseUrl + 'settings',
     editProfileUrl: baseUrl + 'settings/edit-profile',
-    signInUrl: baseUrl + 'login',
+    signInUrl: baseUrl,
     contactsUrl: baseUrl + 'contacts',
     walletUrl: baseUrl + 'wallet',
     chooseWalletUrl: baseUrl + 'wallet/transactions-history/ETH', // переработать

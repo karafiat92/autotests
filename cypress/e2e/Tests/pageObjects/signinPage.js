@@ -7,11 +7,11 @@ const signIn = {
   // Стартовая страница
   signInButton: "#loginButton",
   // Экран введения сидфразы
-  seedPhraseInput: "#seedPhraseField",
+  seedPhraseInput: "[name='seedPhrase']",
   loginButton: "#loginFirstSubmit",
-  // uploadSeedPhrase: "#loginUploadPhrase", на будущее
   // Введение пинкода
-  pinInput: ["#pin_0", "#pin_1", "#pin_2", "#pin_3"],
+  pinInput: ".pinCodeInput_p7ui4lv",
+  pinInputsDiv: ".inputsWrapperClass_i1iz67ks",
   // Стартовая страница авторизированного юзера
   startPage: "https://dev-web.tezro.com/",
 
@@ -19,8 +19,6 @@ const signIn = {
   // Открытие экрана авторизации
   openSigninPage() {
     cy.visit(testData.urls.startUrl);
-    cy.url().should("eq", testData.urls.startUrl);
-    cy.get("button").contains("Log in dev").click();
     cy.url().should("eq", testData.urls.signInUrl);
   },
   // Введение сид-фразы и переход к введению пинкода
@@ -34,12 +32,14 @@ const signIn = {
         "contain.value",
         testData.userLoginData[userLoginDataNumber].seedPhrase
       );
-    cy.get(this.loginButton).click().wait(2000);
+    cy.get("button").contains("Sign In").click().wait(2000);
   },
   // Введение пинкода
   enterPincode(userLoginDataNumber) {
-    this.pinInput.forEach((pin) => {
-      cy.get(pin).type(testData.userLoginData[userLoginDataNumber].pin);
+    cy.get(this.pinInputsDiv).as("listOfPinInputs")
+    .children()
+    .each(($child) => {
+      cy.get($child).type(testData.userLoginData[userLoginDataNumber].pin)
     });
   },
 };

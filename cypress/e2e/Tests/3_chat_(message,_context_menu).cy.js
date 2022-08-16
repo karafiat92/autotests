@@ -15,7 +15,7 @@ beforeEach(() => {
   signIn.enterPincode(userLoginDataNumber)
 });
 describe("User's chat and message's context menu", () => {
-  xit("1. Write message in chat", () => {
+  it("1. Write message in chat", () => {
     chat.chatClosedCheck()
         .openFirstChat()
         .sendMessage(messageForTyping)

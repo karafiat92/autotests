@@ -519,6 +519,8 @@ const chat = {
     cy.get(this.chatsList).contains(chatName).should("not.exist");
     return this;
   },
+  // когда гифты будут запущены, попробую работу с аргументами
+  // без параметра content
   checkMediaQrInChat(type, content) {
     cy.wait(1000)
     .get(this.mediaQRmessage)

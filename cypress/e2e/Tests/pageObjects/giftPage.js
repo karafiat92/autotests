@@ -55,6 +55,23 @@ const gift = {
   okButtonOnGetCardModal: "StyledButton_ss5phhy",
 
   // actions
+  //Проверка пожелания на карте
+  checkWishOnCard(wish) {
+    if (wish == "") {
+      cy.wrap($card).should("contain.text", this.defaultWishOnCard);
+    } else {
+      cy.wrap($card).should("contain.text", wish);
+    }
+  },
+  //Проверка суммы и валюты на карте
+  checkSumOnCard(currency, amount, showSum) {
+    if (showSum == "No") {
+      cy.wrap($card).should("contain.text", "Surprise");
+    } else {
+      cy.wrap($card).should("contain.text", amount + " " + currency);
+    }
+  },
+
   // Открытие экрана создания гифта
   openCreateNewGiftScreen() {
     cy.wait(500)
@@ -70,6 +87,7 @@ const gift = {
     );
     return this;
   },
+
   openWalletsList() {
     cy.wait(100)
       .get(this.currencyButton)
@@ -81,9 +99,10 @@ const gift = {
       .should("exist");
     return this;
   },
-    // Выбор кошелька
-    chooseWallet(currency) {
-      cy.wait(500)
+
+  // Выбор кошелька
+  chooseWallet(currency) {
+    cy.wait(500)
       .get(this.currencyItem)
       .contains(currency)
       .parents(this.currencyItem)
@@ -98,8 +117,9 @@ const gift = {
     cy.get(this.dialogWindow)
       .contains(this.chooseCurrencyTitle)
       .should("not.exist");
-      return this;
-    },
+    return this;
+  },
+
   // Сравнить баланс после отправки транзакции
   compareBalanceInWalletList(currency, transactionAmount) {
     cy.get(this.currencyItem)
@@ -126,6 +146,7 @@ const gift = {
       });
     return this;
   },
+
   // Закрытие списка кошельков
   closeWalletsList() {
     cy.get(this.closeChooseCurrencyModalBtn)
@@ -135,10 +156,12 @@ const gift = {
     cy.get(this.dialogWindow).should("not.exist");
     return this;
   },
-  сheckInternalMinInAmountField(currency, min) {
+
+  сheckInternalMinInAmountField(min) {
     cy.get(this.amountInput).invoke("val").should("equal", min);
     return this;
   },
+  
   enterWish(wish) {
     if (wish != "") {
       cy.get(this.wishInput)
@@ -149,6 +172,7 @@ const gift = {
     } else return this;
     return this;
   },
+
   enterGiftAmount(amount) {
     cy.get(this.amountInput)
       .clear()
@@ -157,6 +181,7 @@ const gift = {
       .should("contain.value", amount);
     return this;
   },
+
   enterNumberOfPeople(amount) {
     cy.get(this.recipientNumberInput)
       .should("contain.value", "1")
@@ -166,12 +191,15 @@ const gift = {
       .should("contain.value", amount);
     return this;
   },
-  setSplitAndShowSumTypse(splitType, showType) {
+
+  setSplitAndShowSumType(splitType, showType) {
     cy.get(this.radioButtonLable).contains(splitType).click();
+    cy.get("#giftCreateGiftCard").contains(splitType).should("have.attr", "checked")
     cy.get(this.radioButtonLable).contains(showType).click();
-    // Нет проверки, не знаю, по чему можно измерить, что кнопка нажата
+    cy.get("#isBalanceShown").contains(showType).should("have.attr", "checked")
     return this;
   },
+
   pressCreateCardButton() {
     cy.get(this.createGiftButton)
       .should("be.visible")
@@ -179,28 +207,7 @@ const gift = {
       .click();
     return this;
   },
-  checkDataOnCardAfterCreating(currency, amount, showSum, wish) {
-    cy.wait(5000)
-      .get(this.dialogWindow)
-      .should("contain.text", this.congratulateTitleText)
-      .find(this.cardOnGetOwnGiftModal)
-      .then(($card) => {
-        if (showSum == "No") {
-          cy.wrap($card).should("contain.text", "Surprise");
-        } else {
-          cy.wrap($card).should("contain.text", amount + " " + currency);
-        }
-        if (wish == "") {
-          cy.wrap($card).should("contain.text", this.defaultWishOnCard);
-        } else {
-          cy.wrap($card).should("contain.text", wish);
-        }
-      })
-      .get(this.qrOnCardInGiftList)
-      .should("exist")
-      .and("be.visible");
-    return this;
-  },
+
   openShareModal() {
     cy.get(this.shareButtonCongratulateModal)
       .should("be.visible")
@@ -208,56 +215,33 @@ const gift = {
       .click();
     return this;
   },
-  closeCongratsModal() {
-    cy.get(this.closeModalButton)
-      .should("be.visible")
-      .and("be.enabled")
-      .click();
-    return this;
-  },
-  openFirstCardGiftInformation() {
-    cy.get(this.giftListInModal)
-      .should("be.visible")
-      .children()
-      .should("exist")
-      .first()
-      .click();
-    cy.get(this.giftInformationTitle).should("be.visible");
-    return this;
-  },
-  checkDataOnGiftInformation(currency, giftAmount, showSum, wishText) {
-    cy.get(this.giftCardOnGiftInformation)
+
+  checkDataOnCardAfterCreating(currency, amount, showSum, wish) {
+    cy.wait(5000)
+      .get(this.dialogWindow)
+      .should("contain.text", this.congratulateTitleText)
+      .find(this.cardOnGetOwnGiftModal)
       .then(($card) => {
-        if (showSum == "No") {
-          cy.wrap($card).should("contain.text", "Surprise");
-        } else {
-          cy.wrap($card).should("contain.text", amount + " " + currency);
-        }
-        if (wish == "") {
-          cy.wrap($card).should("contain.text", this.defaultWishOnCard);
-        } else {
-          cy.wrap($card).should("contain.text", wish);
-        }
+        checkSumOnCard(currency, amount, showSum);
+        checkWishOnCard(wish);
       })
       .get(this.qrOnCardInGiftList)
       .should("exist")
       .and("be.visible");
     return this;
   },
-  openGiftContextMenu(currency, giftAmount, showSum, wish) {
+
+  // для теста 4 по удалению гифта
+  openGiftContextMenu(currency, amount, wish) {
     cy.get(this.giftListInModal)
       .should("be.visible")
       .children()
       .should("exist")
       .contains(currency)
-      .and(giftAmount)
+      .and(amount)
       .and("contain.text", amount + " " + currency)
       .then(($card) => {
-        if (wish == "") {
-          cy.wrap($card).should("contain.text", this.defaultWishOnCard);
-        } else {
-          cy.wrap($card).should("contain.text", wish);
-        }
+        checkWishOnCard(wish);
       })
       .rightclick();
     return this;
@@ -265,6 +249,7 @@ const gift = {
   deleteGift() {
     return this;
   },
+
   closeGiftModal(buttonDestiny) {
     cy.wait(500)
       .get(this.dialogWindow)

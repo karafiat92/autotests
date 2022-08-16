@@ -36,7 +36,7 @@ describe("Gift cards tests", () => {
       .enterWish(wishText)
       .enterGiftAmount(giftAmount)
       .enterNumberOfPeople(numberOfPeople)
-      .setSplitAndShowSumTypse(sumSplit, showSum)
+      .setSplitAndShowSumType(sumSplit, showSum)
       .pressCreateCardButton();
     chat.enterPincode(0);
     gift
@@ -70,7 +70,7 @@ describe("Gift cards tests", () => {
       .enterWish(wishText)
       .enterGiftAmount(giftAmount)
       .enterNumberOfPeople(numberOfPeople)
-      .setSplitAndShowSumTypse(sumSplit, showSum)
+      .setSplitAndShowSumType(sumSplit, showSum)
       .pressCreateCardButton();
     chat.enterPincode(0);
     gift
